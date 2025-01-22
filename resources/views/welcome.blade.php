@@ -1,25 +1,38 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light">
+<x-app-layout :navbar="false">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Final Project</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <!-- Styles / Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
-<div class="flex flex-col items-center justify-center w-screen h-screen">
-    <h1>Lorem ipsum dolor sit.</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, nam.</p>
+<div class="carousel w-full">
+  <div id="item1" class="carousel-item w-full">
+    <img
+      src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
+      class="w-full" />
+  </div>
+  <div id="item2" class="carousel-item w-full">
+    <img
+      src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
+      class="w-full" />
+  </div>
+  <div id="item3" class="carousel-item w-full">
+    <img
+      src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
+      class="w-full" />
+  </div>
+  <div id="item4" class="carousel-item w-full">
+    <img
+      src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
+      class="w-full" />
+  </div>
 </div>
-</body>
+<div class="flex w-full justify-center gap-2 py-2">
+  <a href="#item1" class="btn btn-xs">1</a>
+  <a href="#item2" class="btn btn-xs">2</a>
+  <a href="#item3" class="btn btn-xs">3</a>
+  <a href="#item4" class="btn btn-xs">4</a>
+</div>
 
-</html>
+</x-app-layout>
+
+{{--
+<a href="{{ route('docs.index') }}">Docs</a>
+<a href="{{ route('movies.index') }}">Movies</a>
+<a href="{{ route('about.index') }}">About</a>
+--}}

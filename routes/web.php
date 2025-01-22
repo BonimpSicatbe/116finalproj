@@ -5,19 +5,19 @@ use App\Http\Resources\MovieResource;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
 
+// LANDING PAGE
 Route::get('/', function() {
    return view('welcome');
 })->name('home');
 
+// DOCUMENTATION PAGE
+Route::get('docs', function() {
+    return view('docs.index');
+})->name('docs.index');
+
+// ABOUT PAGE
+Route::get('about', function() {
+   return view('about.index');
+})->name('about.index');
+
 Route::resource('movies', MovieController::class);
-
-//Route::get('/movies', function() {
-//    return MovieResource::collection(Movie::all());
-//});
-//
-//Route::get('/movies/{id}', function($id) {
-//    return MovieResource::collection(
-//        Movie::where("id", $id)->get()
-//    );
-//});
-
