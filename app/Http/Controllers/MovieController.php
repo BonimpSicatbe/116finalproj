@@ -2,27 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\V1\MoviesFilter;
 use App\Models\Movie;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
+use App\Http\Resources\V1\MovieResource;
+use App\Http\Resources\V1\MovieCollection;
+use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        return view('movies.index', collect(['movies' => Movie::all()]));
+        return view('movies.index');
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('movies.create');
+        //
     }
 
     /**
@@ -38,7 +43,7 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
-        return view('movies.show', compact('movie'));
+        return new MovieResource($movie);
     }
 
     /**

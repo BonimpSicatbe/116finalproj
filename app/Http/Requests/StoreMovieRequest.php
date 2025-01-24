@@ -11,7 +11,7 @@ class StoreMovieRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,14 +22,16 @@ class StoreMovieRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'title' => ['required', 'string', 'max:255'],
-            // 'director' => ['required', 'string', 'max:255'],
-            // 'date' => ['required', 'date'],
-            // 'cast' => ['required', 'array'],
-            // 'run_time' => ['required', 'integer'],
-            // 'synopsis' => ['required', 'string'],
-            // 'created_at' => ['required', 'date'],
-            // 'updated_at' => ['required', 'date'],
+            // 'id' => 'required|integer',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'release_date' => 'required|date',
+            'duration' => 'required|integer|min:1',
+            'language' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'rating' => 'required|numeric|min:0|max:10',
+            'poster_url' => 'required|url',
+            'trailer_url' => 'required|url',
         ];
     }
 }

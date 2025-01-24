@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\MovieCollection;
-use App\Http\Resources\MovieResource;
-use App\Models\Movie;
-use App\Http\Requests\StoreMovieRequest;
-use App\Http\Requests\UpdateMovieRequest;
-use mysql_xdevapi\Collection;
+use App\Http\Requests\StoreActorRequest;
+use App\Http\Requests\UpdateActorRequest;
+use App\Http\Resources\V1\ActorCollection;
+use App\Http\Resources\V1\ActorResource;
+use App\Models\Actor;
 
-class MovieController extends Controller
+class ActorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return MovieResource::collection(Movie::all());
+        return new ActorCollection(Actor::all());
     }
 
     /**
@@ -31,7 +30,7 @@ class MovieController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMovieRequest $request)
+    public function store(StoreActorRequest $request)
     {
         //
     }
@@ -39,15 +38,15 @@ class MovieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Movie $movie)
+    public function show(Actor $actor)
     {
-        return MovieResource::make($movie);
+        return new ActorResource($actor);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Movie $movie)
+    public function edit(Actor $actor)
     {
         //
     }
@@ -55,7 +54,7 @@ class MovieController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMovieRequest $request, Movie $movie)
+    public function update(UpdateActorRequest $request, Actor $actor)
     {
         //
     }
@@ -63,7 +62,7 @@ class MovieController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Movie $movie)
+    public function destroy(Actor $actor)
     {
         //
     }

@@ -17,14 +17,15 @@ class MovieFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(3),
-            'director' => $this->faker->name(),
-            'date' => $this->faker->dateTimeBetween(now(), '+10 years'),
-            'cast' => $this->faker->name(),
-            'run_time' => $this->faker->time('H:i:s'),
-            'synopsis' => $this->faker->paragraph(),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'title' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
+            'release_date' => $this->faker->date,
+            'duration' => $this->faker->numberBetween(90, 180),
+            'language' => $this->faker->languageCode,
+            'country' => $this->faker->country,
+            'rating' => $this->faker->randomFloat(1, 0, 10),
+            'poster_url' => 'https://placehold.co/648x960',
+            'trailer_url' => 'https://placehold.co/648x960',
         ];
     }
 }
