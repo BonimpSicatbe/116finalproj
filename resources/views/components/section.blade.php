@@ -8,8 +8,8 @@
 </div> --}}
 
 <div {{ $attributes->merge(['class' => 'container mx-auto sm:px-6 lg:px-8']) }}>
-    <div class="bg-white overflow-hidden">
-        <div class="p-6 bg-white w-full space-y-6">
+    <div class="overflow-hidden">
+        <div class="p-6 w-full space-y-6">
             {{ $slot }}
         </div>
     </div>
