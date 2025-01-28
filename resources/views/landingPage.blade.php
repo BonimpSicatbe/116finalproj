@@ -13,8 +13,11 @@
 
     <header class="h-screen flex items-center justify-center bg-gradient-to-b from-[#030712] to-[#10141f]">
         <div class="text-center px-6">
-            <h1 class="text-6xl font-bold mb-6">Welcome to the Broadway API Docu.</h1>
-            <p class="text-xl mb-8">Streamline your integration with our powerful APIs</p>
+            <h1 class="text-8xl font-bold mb-6">Welcome to Broadway</h1>
+            <h1 class="text-8xl font-bold mb-6 text-[#ff2c21]" >API Docu.</h1>
+            <div class="flex flex-wrap justify-center text-center max-w-3xl mx-auto">
+                <p class="text-2xl mb-8 text-gray-400">Be more simplify with our powerful APIs</p>
+            </div>
             <div class="space-x-4">
                 <a href="#"
                     class="text-white bg-gray-900 hover:bg-gray-800 border border-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-100 dark:bg-white dark:border-gray-200 dark:text-gray-900 dark:hover:bg-gray-100 me-2 mb-2 transition duration-300 ease-in-out">Get Started</a>
