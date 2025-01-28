@@ -8,48 +8,89 @@ class SideBar extends Component
 {
 
     public $menuItems = [
-          [
-                'title' => 'Introduction',
-                'subItems' => [
-                    'Overview',
-                    'Getting Started'
-                ]
-          ],
-          [
-                'title' => 'Installation',
-                'subItems' => [
-                    'Requirements',
-                    'Steps'
-                ]
-          ],
-          [
-                'title' => 'Configuration',
-                'subItems' => [
-                    'Basic Configuration',
-                    'Advanced Configuration'
-                ]
-          ],
-          [
-                'title' => 'Error Handling',
-                'subItems' => [
-                    'Common Errors',
-                    'Debugging'
-                ]
-          ],
-          [
-                'title' => 'Endpoints',
-                'subItems' => [
-                    'List of Endpoints',
-                    'Endpoint Details'
-                ]
-          ],
-          [
-                'title' => 'Authentication',
-                'subItems' => [
-                    'Login',
-                    'Register'
-                ]
-          ],
+      [
+            'title' => 'Introduction',
+            'subItems' => [
+                'Overview',
+                'Getting Started',
+                'Authetication and Authorization',
+            ]
+      ],    
+      [
+            'title' => 'Shows API',
+            'subItems' => [
+                'Description',
+                'Base URL',
+                'Endpoints',
+                'Authentication amd Authorization',
+                'Parameters',
+                'Format Type',
+                'Properties with description',
+                'Request',
+                'Response',
+                'Errors',
+            ]
+      ],
+      [
+        'title' => 'Actors API',
+        'subItems' => [
+            'Description',
+            'Base URL',
+            'Endpoints',
+            'Authentication amd Authorization',
+            'Parameters',
+            'Format Type',
+            'Properties with description',
+            'Request',
+            'Response',
+            'Errors',
+        ]
+      ],
+      [
+        'title' => 'Directors API',
+        'subItems' => [
+            'Description',
+            'Base URL',
+            'Endpoints',
+            'Authentication amd Authorization',
+            'Parameters',
+            'Format Type',
+            'Properties with description',
+            'Request',
+            'Response',
+            'Errors',
+        ]
+      ],
+      [
+        'title' => 'Genre API',
+        'subItems' => [
+            'Description',
+            'Base URL',
+            'Endpoints',
+            'Authentication amd Authorization',
+            'Parameters',
+            'Format Type',
+            'Properties with description',
+            'Request',
+            'Response',
+            'Errors',
+        ]
+      ],
+      [
+        'title' => 'Ticket API',
+        'subItems' => [
+            'Description',
+            'Base URL',
+            'Endpoints',
+            'Authentication amd Authorization',
+            'Parameters',
+            'Format Type',
+            'Properties with description',
+            'Request',
+            'Response',
+            'Errors',
+        ]
+      ],
    ];
     public function render()
     {

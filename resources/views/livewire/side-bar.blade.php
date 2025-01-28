@@ -1,8 +1,10 @@
 <div class="h-screen w-96 bg-gray-900 text-white flex flex-col overflow-y-auto overflow-hidden fixed">
-    <div class="p-10 text-5xl font-bold text-center flex items-center justify-center space-x-3">
-        <x-play-icon />
-        <span class="text-[#ff2c21]">Broadway</span>
-    </div>
+    <a href ="landing-page">
+        <div class="p-10 text-5xl font-bold text-center flex items-center justify-center space-x-3">
+            <x-play-icon />
+            <span class="text-[#ff2c21]">Broadway</span>
+        </div>
+    </a>
 
     <ul class="space-y-3 text-base px-10 pb-10">
         @foreach($menuItems as $item)
