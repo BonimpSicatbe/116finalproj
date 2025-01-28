@@ -16,7 +16,7 @@
             <h1 class="text-8xl font-bold mb-6">Welcome to Broadway</h1>
             <h1 class="text-8xl font-bold mb-6 text-[#ff2c21]" >API Docu.</h1>
             <div class="flex flex-wrap justify-center text-center max-w-3xl mx-auto">
-                <p class="text-2xl mb-8 text-gray-400">Be more simplify with our powerful APIs</p>
+                <p class="text-2xl mb-8 text-gray-400">Be more simplify with our dynamic APIs</p>
             </div>
             <div class="space-x-4">
                 <a href="#"
