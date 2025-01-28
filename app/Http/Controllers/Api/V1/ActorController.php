@@ -2,21 +2,35 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Filters\V1\ActorsFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreActorRequest;
 use App\Http\Requests\UpdateActorRequest;
 use App\Http\Resources\V1\ActorCollection;
 use App\Http\Resources\V1\ActorResource;
 use App\Models\Actor;
+use Illuminate\Http\Request;
 
 class ActorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new ActorCollection(Actor::all());
+        try {
+            $filter = new ActorsFilter();
+            $queryItems = $filter->transform($request);
+
+            if (count($queryItems) == 0) {
+                return new ActorCollection(Actor::paginate());
+            } else {
+                $actor = Actor::where($queryItems)->paginate();
+                return new ActorCollection($actor->appends($request->query()));
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while processing your request.'], 500);
+        }
     }
 
     /**

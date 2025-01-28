@@ -22,7 +22,18 @@ class StoreFavoriteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => 'required|exists:users,id',
+            'movie_id' => 'required|exists:movies,id',
+            // 'user_id' => [
+            //     'required',
+            //     'exists:users,id',
+            //     function ($attribute, $value, $fail) {
+            //         if (\App\Models\Favorite::where('user_id', $value)->where('movie_id', request()->movie_id)->exists()) {
+            //             $fail('The user has already favorited this movie.');
+            //         }
+            //     },
+            // ],
+            // 'movie_id' => 'required|exists:movies,id',
         ];
     }
 }

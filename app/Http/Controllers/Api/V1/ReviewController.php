@@ -2,21 +2,35 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Filters\V1\ReviewsFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreReviewRequest;
 use App\Http\Requests\UpdateReviewRequest;
 use App\Http\Resources\V1\ReviewCollection;
 use App\Http\Resources\V1\ReviewResource;
 use App\Models\Review;
+use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new ReviewCollection(Review::all());
+        try {
+            $filter = new ReviewsFilter();
+            $queryItems = $filter->transform($request);
+
+            if (count($queryItems) == 0) {
+                return new ReviewCollection(Review::paginate());
+            } else {
+                $review = Review::where($queryItems)->paginate();
+                return new ReviewCollection($review->appends($request->query()));
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while processing your request.'], 500);
+        }
     }
 
     /**

@@ -22,7 +22,10 @@ class StoreReviewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'movie_id' => 'required|exists:movies,id',
+            'user_id' => 'required|exists:users,id',
+            'rating' => 'required|integer|min:1|max:10',
+            'comment' => 'nullable|string|max:255',
         ];
     }
 }

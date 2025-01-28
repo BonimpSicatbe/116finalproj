@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreDirectorRequest extends FormRequest
+class StoreTicketRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,9 @@ class StoreDirectorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:directors,name',
-            'birth_date' => 'required|date',
-            'biography' => 'nullable|string',
-            'profile_url' => 'nullable|url',
+            'user_id' => 'required|exists:users,id',
+            'movie_id' => 'required|exists:movies,id',
+            'show_time' => 'required|date_format:Y-m-d H:i:s',
         ];
     }
 }

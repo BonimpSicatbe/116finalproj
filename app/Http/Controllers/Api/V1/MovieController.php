@@ -25,7 +25,8 @@ class MovieController extends Controller
             if (count($queryItems) == 0) {
                 return new MovieCollection(Movie::paginate());
             } else {
-                return new MovieCollection(Movie::where($queryItems)->paginate());
+                $movie = Movie::where($queryItems)->paginate();
+                return new MovieCollection($movie->appends($request->query()));
             }
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while processing your request.'], 500);

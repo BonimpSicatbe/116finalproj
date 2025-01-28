@@ -10,7 +10,17 @@ class Movie extends Model
     /** @use HasFactory<\Database\Factories\MovieFactory> */
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'release_date', 'duration', 'language', 'country', 'rating', 'poster_url', 'trailer_url'];
+    protected $fillable = [
+        'title',
+        'description',
+        'release_date',
+        'duration',
+        'language',
+        'country',
+        'rating',
+        'poster_url',
+        'trailer_url'
+    ];
 
     public function genres()
     {
@@ -31,4 +41,9 @@ class Movie extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    // public fuction tickets()
+    // {
+    //     return $this->hasMany(Ticket::class);
+    // }
 }

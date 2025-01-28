@@ -22,7 +22,10 @@ class StoreActorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255|unique:actors,name',
+            'birthDate' => 'required|date',
+            'biography' => 'nullable|string',
+            'profileUrl' => 'nullable|url',
         ];
     }
 }

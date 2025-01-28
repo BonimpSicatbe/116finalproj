@@ -16,8 +16,10 @@ class MovieFactory extends Factory
      */
     public function definition(): array
     {
+        $title = $this->faker->sentence(3, true);
+
         return [
-            'title' => $this->faker->sentence,
+            'title' => $title,
             'description' => $this->faker->paragraph,
             'release_date' => $this->faker->date,
             'duration' => $this->faker->numberBetween(90, 180),
@@ -25,7 +27,7 @@ class MovieFactory extends Factory
             'country' => $this->faker->country,
             'rating' => $this->faker->randomFloat(1, 0, 10),
             'poster_url' => 'https://placehold.co/648x960',
-            'trailer_url' => 'https://placehold.co/648x960',
+            'trailer_url' => 'https://placehold.co/960x648',
         ];
     }
 }
