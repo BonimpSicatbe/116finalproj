@@ -17,7 +17,7 @@ class SideBar extends Component
             ]
       ],    
       [
-            'title' => 'Shows API',
+            'title' => 'Movies API',
             'subItems' => [
                 'Description',
                 'Base URL',

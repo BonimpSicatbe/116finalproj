@@ -93,7 +93,7 @@
 
     <footer id="footer" class="py-8 bg-[#030712]">
         <div class="container mx-auto text-center">
-            <p>&copy; 2025 Broadyway Shows API Documentation. All rights reserved.</p>
+            <p>&copy; 2025 Broadyway Movies API Documentation. All rights reserved.</p>
         </div>
     </footer>
 @endsection
