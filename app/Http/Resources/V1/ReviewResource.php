@@ -20,6 +20,9 @@ class ReviewResource extends JsonResource
             'userId' => $this->user_id,
             'rating' => $this->rating,
             'comment' => $this->comment,
+
+            'movie' => $this->when($request->query('includeAll') || $request->query('includeMovie'), $this->movie),
+            'user' => $this->when($request->query('includeAll') || $request->query('includeUser'), $this->user),
         ];
     }
 }

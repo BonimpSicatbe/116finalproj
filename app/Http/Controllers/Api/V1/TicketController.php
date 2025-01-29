@@ -38,7 +38,12 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request)
     {
-        //
+        try {
+            $ticket = Ticket::create($request->validated());
+            return new TicketResource($ticket);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while creating the ticket.'], 500);
+        }
     }
 
     /**
@@ -46,7 +51,26 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        //
+        try {
+            $includeMovie = request()->query('includeMovie');
+            $includeUser = request()->query('includeUser');
+            $includeAll = request()->query('includeAll');
+
+            if ($includeAll) {
+                $ticket->load(['movie', 'user']);
+            } else {
+                if ($includeMovie) {
+                    $ticket->load('movie');
+                }
+                if ($includeUser) {
+                    $ticket->load('user');
+                }
+            }
+
+            return new TicketResource($ticket);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while retrieving the ticket.'], 500);
+        }
     }
 
     /**
@@ -54,7 +78,12 @@ class TicketController extends Controller
      */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
-        //
+        try {
+            $ticket->update($request->validated());
+            return new TicketResource($ticket);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while updating the ticket.'], 500);
+        }
     }
 
     /**

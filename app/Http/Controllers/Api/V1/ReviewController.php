@@ -46,7 +46,12 @@ class ReviewController extends Controller
      */
     public function store(StoreReviewRequest $request)
     {
-        //
+        try {
+            $review = Review::create($request->validated());
+            return new ReviewResource($review);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while creating the review.'], 500);
+        }
     }
 
     /**
@@ -54,7 +59,26 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        return new ReviewResource($review);
+        try {
+            $includeMovie = request()->query('includeMovie');
+            $includeUser = request()->query('includeUser');
+            $includeAll = request()->query('includeAll');
+
+            if ($includeAll) {
+                $review->load(['movie', 'user']);
+            } else {
+                if ($includeMovie) {
+                    $review->load('movie');
+                }
+                if ($includeUser) {
+                    $review->load('user');
+                }
+            }
+
+            return new ReviewResource($review);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while retrieving the review.'], 500);
+        }
     }
 
     /**
@@ -70,7 +94,12 @@ class ReviewController extends Controller
      */
     public function update(UpdateReviewRequest $request, Review $review)
     {
-        //
+        try {
+            $review->update($request->validated());
+            return new ReviewResource($review);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while updating the review.'], 500);
+        }
     }
 
     /**

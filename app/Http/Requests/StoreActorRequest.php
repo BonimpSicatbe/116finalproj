@@ -11,7 +11,7 @@ class StoreActorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,9 +23,9 @@ class StoreActorRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|unique:actors,name',
-            'birthDate' => 'required|date',
+            'birth_date' => 'required|date',
             'biography' => 'nullable|string',
-            'profileUrl' => 'nullable|url',
+            'profile_url' => 'nullable|url',
         ];
     }
 }

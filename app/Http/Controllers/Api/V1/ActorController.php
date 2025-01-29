@@ -46,7 +46,12 @@ class ActorController extends Controller
      */
     public function store(StoreActorRequest $request)
     {
-        //
+        try {
+            $actor = Actor::create($request->validated());
+            return new ActorResource($actor);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while creating the actor.'], 500);
+        }
     }
 
     /**
@@ -54,7 +59,17 @@ class ActorController extends Controller
      */
     public function show(Actor $actor)
     {
-        return new ActorResource($actor);
+        try {
+            $includeMovies = request()->query('includeMovies');
+
+            if ($includeMovies) {
+                $actor->load('movies');
+            }
+
+            return new ActorResource($actor);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while retrieving the actor.'], 500);
+        }
     }
 
     /**
@@ -70,7 +85,12 @@ class ActorController extends Controller
      */
     public function update(UpdateActorRequest $request, Actor $actor)
     {
-        //
+        try {
+            $actor->update($request->validated());
+            return new ActorResource($actor);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while updating the actor.'], 500);
+        }
     }
 
     /**

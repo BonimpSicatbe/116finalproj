@@ -46,7 +46,12 @@ class GenreController extends Controller
      */
     public function store(StoreGenreRequest $request)
     {
-        //
+        try {
+            $genre = Genre::create($request->validated());
+            return new GenreResource($genre);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while creating the genre.'], 500);
+        }
     }
 
     /**
@@ -54,7 +59,17 @@ class GenreController extends Controller
      */
     public function show(Genre $genre)
     {
-        return new GenreResource($genre);
+        try {
+            $includeMovies = request()->query('includeMovies');
+
+            if ($includeMovies) {
+                $genre->load('movies');
+            }
+
+            return new GenreResource($genre);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while retrieving the genre.'], 500);
+        }
     }
 
     /**
@@ -70,7 +85,12 @@ class GenreController extends Controller
      */
     public function update(UpdateGenreRequest $request, Genre $genre)
     {
-        //
+        try {
+            $genre->update($request->validated());
+            return new GenreResource($genre);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while updating the genre.'], 500);
+        }
     }
 
     /**

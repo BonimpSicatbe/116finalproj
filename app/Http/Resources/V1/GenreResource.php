@@ -18,6 +18,8 @@ class GenreResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+
+            'movies' => $this->when((bool) $request->query('includeMovies'), $this->movies),
         ];
     }
 }

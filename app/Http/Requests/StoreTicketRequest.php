@@ -11,7 +11,7 @@ class StoreTicketRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,8 +22,8 @@ class StoreTicketRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
-            'movie_id' => 'required|exists:movies,id',
+            'user_id' => 'required|integer|exists:users,id',
+            'movie_id' => 'required|integer|exists:movies,id',
             'show_time' => 'required|date_format:Y-m-d H:i:s',
         ];
     }

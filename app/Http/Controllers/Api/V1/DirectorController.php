@@ -46,7 +46,12 @@ class DirectorController extends Controller
      */
     public function store(StoreDirectorRequest $request)
     {
-        //
+        try {
+            $director = Director::create($request->validated());
+            return new DirectorResource($director);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while creating the director.'], 500);
+        }
     }
 
     /**
@@ -54,7 +59,17 @@ class DirectorController extends Controller
      */
     public function show(Director $director)
     {
-        return new DirectorResource($director);
+        try {
+            $includeMovies = request()->query('includeMovies');
+
+            if ($includeMovies) {
+                $director->load('movies');
+            }
+
+            return new DirectorResource($director);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while retrieving the director.'], 500);
+        }
     }
 
     /**
@@ -70,7 +85,12 @@ class DirectorController extends Controller
      */
     public function update(UpdateDirectorRequest $request, Director $director)
     {
-        //
+        try {
+            $director->update($request->validated());
+            return new DirectorResource($director);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while updating the director.'], 500);
+        }
     }
 
     /**

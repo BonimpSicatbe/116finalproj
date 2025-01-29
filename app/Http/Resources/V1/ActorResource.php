@@ -20,6 +20,8 @@ class ActorResource extends JsonResource
             'birthDate' => $this->birth_date,
             'biography' => $this->biography,
             'profileUrl' => $this->profile_url,
+
+            'movies' => $this->when((bool) $request->query('includeMovies'), $this->movies),
         ];
     }
 }

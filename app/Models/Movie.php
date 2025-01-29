@@ -42,8 +42,8 @@ class Movie extends Model
         return $this->hasMany(Review::class);
     }
 
-    // public fuction tickets()
-    // {
-    //     return $this->hasMany(Ticket::class);
-    // }
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }

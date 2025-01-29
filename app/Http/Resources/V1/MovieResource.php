@@ -25,6 +25,12 @@ class MovieResource extends JsonResource
             'rating' => $this->rating,
             'posterUrl' => $this->poster_url,
             'trailerUrl' => $this->trailer_url,
+
+            'actors' => $this->when($request->query('includeAll') || $request->query('includeActors'), $this->actors),
+            'directors' => $this->when($request->query('includeAll') || $request->query('includeDirectors'), $this->directors),
+            'genre' => $this->when($request->query('includeAll') || $request->query('includeGenre'), $this->genre),
+            'review' => $this->when($request->query('includeAll') || $request->query('includeReview'), $this->review),
+            'tickets' => $this->when($request->query('includeAll') || $request->query('includeTickets'), $this->tickets),
         ];
     }
 }

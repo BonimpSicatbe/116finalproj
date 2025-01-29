@@ -46,12 +46,12 @@ class MovieController extends Controller
      */
     public function store(StoreMovieRequest $request)
     {
-        // try {
+        try {
             $movie = Movie::create($request->validated());
             return new MovieResource($movie);
-        // } catch (\Exception $e) {
-            // return response()->json(['error' => 'An error occurred while storing the movie.'], 500);
-        // }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while storing the movie.'], 500);
+        }
     }
 
     /**
@@ -60,6 +60,33 @@ class MovieController extends Controller
     public function show(Movie $movie)
     {
         try {
+            $includeActors = request()->query('includeActors');
+            $includeDirectors = request()->query('includeDirectors');
+            $includeGenre = request()->query('includeGenre');
+            $includeReview = request()->query('includeReview');
+            $includeTickets = request()->query('includeTickets');
+            $includeAll = request()->query('includeAll');
+
+            if ($includeAll) {
+                $movie->load(['actors', 'directors', 'genres', 'reviews', 'tickets']);
+            } else {
+                if ($includeActors) {
+                    $movie->load('actors');
+                }
+                if ($includeDirectors) {
+                    $movie->load('directors');
+                }
+                if ($includeGenre) {
+                    $movie->load('genres');
+                }
+                if ($includeReview) {
+                    $movie->load('reviews');
+                }
+                if ($includeTickets) {
+                    $movie->load('tickets');
+                }
+            }
+
             return new MovieResource($movie);
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while retrieving the movie.'], 500);
