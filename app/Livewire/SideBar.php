@@ -91,6 +91,21 @@ class SideBar extends Component
             'Errors',
         ]
       ],
+      [
+        'title' => 'Review API',
+        'subItems' => [
+            'Description',
+            'Base URL',
+            'Endpoints',
+            'Authentication amd Authorization',
+            'Parameters',
+            'Format Type',
+            'Properties with description',
+            'Request',
+            'Response',
+            'Errors',
+        ]
+      ],
    ];
     public function render()
     {

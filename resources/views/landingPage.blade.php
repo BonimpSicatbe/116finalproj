@@ -3,7 +3,7 @@
    <!-- Navbar -->
     <nav class="fixed top-0 left-0 w-full z-50 blurred-bg">
         <div class="container mx-auto px-4 py-7 flex justify-between items-center">
-            <a href="landing-page" class="text-2xl font-bold">Broadway API</a>
+            <a href="landing-page" class="text-2xl font-bold">Broadway <span class="text-[#ff2c21]">API</span></a>
             <div class="space-x-6">
                 <a href="documentation"
                 class="text-white bg-gray-900 hover:bg-gray-800 border border-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-100 dark:bg-white dark:border-gray-200 dark:text-gray-900 dark:hover:bg-gray-100 me-2 mb-2 transition duration-300 ease-in-out">Documentation</a>
@@ -93,7 +93,7 @@
 
     <footer id="footer" class="py-8 bg-[#030712]">
         <div class="container mx-auto text-center">
-            <p>&copy; 2025 Broadyway Movies API Documentation. All rights reserved.</p>
+            <p>&copy; 2025 Broadyway Movies <span class="text-[#ff2c21] font-bold">API</span> Documentation. All rights reserved.</p>
         </div>
     </footer>
 @endsection
