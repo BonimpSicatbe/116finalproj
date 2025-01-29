@@ -6,15 +6,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/landing-page', function () {
-    return view('landingPage');
-});
+// Route::get('/landing-page', function () {
+//     return view('landingPage');
+// });
 Route::get('/documentation', function () {
     return view('documentation');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/landing-page', function () {
+    return view('landingPage');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -23,4 +23,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -98,6 +98,11 @@ class DirectorController extends Controller
      */
     public function destroy(Director $director)
     {
-        //
+        try {
+            $director->delete();
+            return response()->json(['message' => 'Director deleted successfully.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while deleting the director.'], 500);
+        }
     }
 }

@@ -98,6 +98,11 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        //
+        try {
+            $genre->delete();
+            return response()->json(['message' => 'Genre deleted successfully.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while deleting the genre.'], 500);
+        }
     }
 }

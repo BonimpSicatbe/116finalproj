@@ -98,6 +98,11 @@ class ActorController extends Controller
      */
     public function destroy(Actor $actor)
     {
-        //
+        try {
+            $actor->delete();
+            return response()->json(['message' => 'Actor deleted successfully.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while deleting the actor.'], 500);
+        }
     }
 }

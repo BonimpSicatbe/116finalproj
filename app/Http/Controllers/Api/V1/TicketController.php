@@ -91,6 +91,11 @@ class TicketController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
-        //
+        try {
+            $ticket->delete();
+            return response()->json(['message' => 'Ticket deleted successfully.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while deleting the ticket.'], 500);
+        }
     }
 }

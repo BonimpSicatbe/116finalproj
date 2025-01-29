@@ -107,6 +107,11 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        //
+        try {
+            $review->delete();
+            return response()->json(['message' => 'Review deleted successfully.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while deleting the review.'], 500);
+        }
     }
 }

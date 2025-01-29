@@ -107,6 +107,11 @@ class FavoriteController extends Controller
      */
     public function destroy(Favorite $favorite)
     {
-        //
+        try {
+            $favorite->delete();
+            return response()->json(['message' => 'Favorite deleted successfully.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while deleting the favorite.'], 500);
+        }
     }
 }
