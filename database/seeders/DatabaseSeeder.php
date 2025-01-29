@@ -19,6 +19,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
+
         // Create some genres
         $genres = Genre::factory(25)->create();
 
