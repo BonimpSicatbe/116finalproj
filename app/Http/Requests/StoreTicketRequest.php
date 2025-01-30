@@ -24,7 +24,7 @@ class StoreTicketRequest extends FormRequest
         return [
             'user_id' => 'required|integer|exists:users,id',
             'movie_id' => 'required|integer|exists:movies,id',
-            'show_time' => 'required|date_format:Y-m-d H:i:s',
+            'show_time' => 'required|date_format:Y-m-d H:i:s|unique:tickets,show_time,NULL,id,user_id,' . $this->user_id . ',movie_id,' . $this->movie_id,
         ];
     }
 }

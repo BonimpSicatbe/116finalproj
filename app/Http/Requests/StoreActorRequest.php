@@ -25,7 +25,6 @@ class StoreActorRequest extends FormRequest
             'name' => 'required|string|max:255|unique:actors,name',
             'birth_date' => 'required|date',
             'biography' => 'nullable|string',
-            'profile_url' => 'nullable|url',
         ];
     }
 }

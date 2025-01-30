@@ -47,10 +47,20 @@ class DirectorController extends Controller
     public function store(StoreDirectorRequest $request)
     {
         try {
+            // Create the director with validated data
             $director = Director::create($request->validated());
+
+            // Update profile_url dynamically if not provided
+            if (!$request->filled('profile_url')) {
+                $director->update(['profile_url' => url('directors/' . $director->id)]);
+            }
+
             return new DirectorResource($director);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'An error occurred while creating the director.'], 500);
+            return response()->json([
+                'error' => 'An error occurred while creating the director.',
+                'message' => $e->getMessage(),
+            ], 500);
         }
     }
 

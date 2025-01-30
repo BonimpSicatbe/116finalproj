@@ -22,7 +22,9 @@ class UpdateActorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255|unique:actors,name,' . $this->route('actor'),
+            'birth_date' => 'required|date',
+            'biography' => 'nullable|string',
         ];
     }
 }

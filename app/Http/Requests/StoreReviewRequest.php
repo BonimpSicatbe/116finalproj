@@ -23,9 +23,18 @@ class StoreReviewRequest extends FormRequest
     {
         return [
             'movie_id' => 'required|exists:movies,id',
-            'user_id' => 'required|exists:users,id',
+            // 'user_id' => 'required|exists:users,id',
             'rating' => 'required|integer|min:1|max:10',
             'comment' => 'nullable|string|max:255',
+            'user_id' => [
+                'required',
+                'exists:users,id',
+                function ($attribute, $value, $fail) {
+                    if (\App\Models\Review::where('user_id', $value)->where('movie_id', $this->movie_id)->exists()) {
+                        $fail('The user has already reviewed this movie.');
+                    }
+                },
+            ],
         ];
     }
 }
