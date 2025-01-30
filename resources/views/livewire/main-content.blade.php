@@ -9,15 +9,15 @@
         <div class="container ml-5 mr-5">
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Overview</h2>
             <p class="text-gray-400 mt-6 text-xl leading-relaxed ml-5 mr-20">The quick brown fox jumps over the lazy dog</p>
-           
+
         </div>
     </div>
-    
+
     <div class="space-y-6 mt-11">
         <div class="container ml-5 mr-5">
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Getting Started</h2>
             <p class="text-gray-400 mt-6 text-xl leading-relaxed ml-5 mr-20">The quick brown fox jumps over the lazy dog</p>
-           
+
         </div>
     </div>
 
@@ -25,7 +25,7 @@
         <div class="container ml-5 mr-5">
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Authentication and Authorization</h2>
             <p class="text-gray-400 mt-6 text-xl leading-relaxed ml-5 mr-20">The quick brown fox jumps over the lazy dog</p>
-           
+
         </div>
     </div>
 
@@ -76,7 +76,7 @@
             <p class="text-gray-400 mt-6 text-xl leading-relaxed ml-5 mr-20"></p>
         </div>
     </div>
-    
+
     <div class="space-y-6 mt-11">
         <div class="container ml-5 mr-5">
             <h2 class="text-3xl font-bold text-[#d7d7db] my-2">Response: </h2>
@@ -94,7 +94,7 @@
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Request</h2>
             </div>
         <div
-            class="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative max-w-full">
+            class=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative overflow-hidden bg-gray-800 w-full">
             <button class="absolute top-2 right-2 text-white font-bold py-1 px-2 rounded" onclick="copyToClipboard(this)"
                 title="Copy to clipboard">
                 <span id="default-message">
@@ -126,15 +126,28 @@
             </button>
             <pre class="p-4 rounded mt-4 overflow-x-auto">
             <code class="language-javascript">
-        fetch('https://api.example.com/start', {
-        method: 'GET',
-        headers: {
-        'Authorization': 'Bearer YOUR_API_KEY'
-        }
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
+                fetch('http://127.0.0.1:8000/api/v1/movies')
+                .then(response => response.json()) // Convert the response to JSON
+                .then(data => {
+                    if (data.data) {
+                        const movies = data.data.slice(0, 2); // Limit to 2 results
+                        const moviesList = document.getElementById('movies-list');
+
+                        // Loop through movies and append them to the list
+                        movies.forEach(function(movie) {
+                            const listItem = document.createElement('li');
+                            listItem.innerHTML = `
+                                <pre>${JSON.stringify(movie, null, 2)}</pre>
+                            `;
+                            moviesList.appendChild(listItem);
+                        });
+                    } else {
+                        console.log('Error:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('There was an error fetching the movies:', error);
+                });
             </code>
             </pre>
         </div>
@@ -145,7 +158,7 @@
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Response</h2>
         </div>
         <div
-            class="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative max-w-full">
+            class=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative overflow-hidden bg-gray-800 w-full">
             <button class="absolute top-2 right-2 text-white font-bold py-1 px-2 rounded" onclick="copyToClipboard(this)"
                 title="Copy to clipboard">
                 <span id="default-message">
@@ -175,19 +188,36 @@
                     </span>
                 </span>
             </button>
-            <pre class="p-4 rounded mt-4 overflow-x-auto">
-            <code class="language-javascript">
-        fetch('https://api.example.com/start', {
-        method: 'GET',
-        headers: {
-        'Authorization': 'Bearer YOUR_API_KEY'
-        }
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
-            </code>
-            </pre>
+            <div class="w-full overflow-hidden">
+                <ul id="movies-list"></ul>
+                <script>
+                    fetch('http://127.0.0.1:8000/api/v1/movies')
+                        .then(response => response.json()) // Convert the response to JSON
+                        .then(data => {
+                            if (data.data) {
+                                const movies = data.data.slice(0, 2); // Limit to 2 results
+                                const moviesList = document.getElementById('movies-list');
+
+                                // Loop through movies and append them to the list
+                                movies.forEach(function(movie) {
+                                    const listItem = document.createElement('li');
+                                    listItem.innerHTML = `
+                                        <pre>${JSON.stringify(movie, null, 2)}</pre>
+                                    `;
+                                    moviesList.appendChild(listItem);
+                                });
+                            } else {
+                                console.log('Error:', data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('There was an error fetching the movies:', error);
+                        });
+                </script>
+            </div>
+            {{-- <pre class="p-4 rounded mt-4 overflow-x-auto">
+
+            </pre> --}}
         </div>
     </div>
 
@@ -196,9 +226,9 @@
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Errors</h2>
             <p class="text-gray-400 mt-6 text-xl leading-relaxed ml-5 mr-20">This API uses the following error codes:</p>
         </div>
-        
+
     </div>
-    
+
     <hr class="mt-16 border-gray-700" />
 
     <!-- ACTORS API -->
@@ -209,7 +239,7 @@
         <div class="container ml-5 mr-5">
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Description</h2>
             <p class="text-gray-400 mt-6 text-xl leading-relaxed ml-5 mr-20">This is an API to fetch actors.</p>
-           
+
         </div>
     </div>
 
@@ -241,7 +271,7 @@
             <p class="text-gray-400 mt-6 text-xl leading-relaxed ml-5 mr-20">The quick brown fox jumps over the lazy dog</p>
         </div>
     </div>
-    
+
     <div class="space-y-6 mt-11">
         <div class="container ml-5 mr-5">
             <h2 class="text-3xl font-bold text-[#d7d7db] my-2">Response: </h2>
@@ -249,14 +279,14 @@
             <p class="text-gray-400 mt-6 text-xl leading-relaxed ml-5 mr-20">Return a JSON object with the following properties:</p>
         </div>
     </div>
-    
+
     <div class="space-y-6 mt-11">
         <div class="container ml-5 mr-5">
             <h2 class="text-3xl font-bold text-[#d7d7db] my-2">Example: </h2>
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Request</h2>
         </div>
         <div
-            class="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative max-w-full">
+            class=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative overflow-hidden bg-gray-800 w-full">
             <button class="absolute top-2 right-2 text-white font-bold py-1 px-2 rounded" onclick="copyToClipboard(this)"
                 title="Copy to clipboard">
                 <span id="default-message">
@@ -288,7 +318,7 @@
             </button>
             <pre class="p-4 rounded mt-4 overflow-x-auto">
             <code class="language-javascript">
-        fetch('https://api.example.com/start', {
+        {{-- fetch('https://api.example.com/start', {
         method: 'GET',
         headers: {
         'Authorization': 'Bearer YOUR_API_KEY'
@@ -296,7 +326,7 @@
         })
         .then(response => response.json())
         .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Error:', error)); --}}
             </code>
             </pre>
         </div>
@@ -307,7 +337,7 @@
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Response</h2>
         </div>
         <div
-            class="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative max-w-full">
+            class=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative overflow-hidden bg-gray-800 w-full">
             <button class="absolute top-2 right-2 text-white font-bold py-1 px-2 rounded" onclick="copyToClipboard(this)"
                 title="Copy to clipboard">
                 <span id="default-message">
@@ -337,19 +367,33 @@
                     </span>
                 </span>
             </button>
-            <pre class="p-4 rounded mt-4 overflow-x-auto">
-            <code class="language-javascript">
-        fetch('https://api.example.com/start', {
-        method: 'GET',
-        headers: {
-        'Authorization': 'Bearer YOUR_API_KEY'
-        }
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
-            </code>
-            </pre>
+            <div class="w-full overflow-hidden">
+                <ul id="actors-list"></ul>
+                <script>
+                    fetch('http://127.0.0.1:8000/api/v1/actors')
+                        .then(response => response.json()) // Convert the response to JSON
+                        .then(data => {
+                            if (data.data) {
+                                const actors = data.data.slice(0, 2); // Limit to 2 results
+                                const actorsList = document.getElementById('actors-list');
+
+                                // Loop through actors and append them to the list
+                                actors.forEach(function(actor) {
+                                    const listItem = document.createElement('li');
+                                    listItem.innerHTML = `
+                                        <pre>${JSON.stringify(actor, null, 2)}</pre>
+                                    `;
+                                    actorsList.appendChild(listItem);
+                                });
+                            } else {
+                                console.log('Error:', data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('There was an error fetching the actors:', error);
+                        });
+                </script>
+            </div>
         </div>
     </div>
 
@@ -358,7 +402,7 @@
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Error</h2>
             <p class="text-gray-400 mt-6 text-xl leading-relaxed ml-5 mr-20">This API uses the following error codes:</p>
         </div>
-        
+
     </div>
 
     <hr class="mt-16 border-gray-700" />
@@ -417,7 +461,7 @@
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Request</h2>
         </div>
         <div
-            class="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative max-w-full">
+            class=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative overflow-hidden bg-gray-800 w-full">
             <button class="absolute top-2 right-2 text-white font-bold py-1 px-2 rounded" onclick="copyToClipboard(this)"
                 title="Copy to clipboard">
                 <span id="default-message">
@@ -449,7 +493,7 @@
             </button>
             <pre class="p-4 rounded mt-4 overflow-x-auto">
             <code class="language-javascript">
-        fetch('https://api.example.com/start', {
+        {{-- fetch('https://api.example.com/start', {
         method: 'GET',
         headers: {
         'Authorization': 'Bearer YOUR_API_KEY'
@@ -457,7 +501,7 @@
         })
         .then(response => response.json())
         .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Error:', error)); --}}
             </code>
             </pre>
         </div>
@@ -468,7 +512,7 @@
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Response</h2>
         </div>
         <div
-            class="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative max-w-full">
+            class=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative overflow-hidden bg-gray-800 w-full">
             <button class="absolute top-2 right-2 text-white font-bold py-1 px-2 rounded" onclick="copyToClipboard(this)"
                 title="Copy to clipboard">
                 <span id="default-message">
@@ -498,19 +542,33 @@
                     </span>
                 </span>
             </button>
-            <pre class="p-4 rounded mt-4 overflow-x-auto">
-            <code class="language-javascript">
-        fetch('https://api.example.com/start', {
-        method: 'GET',
-        headers: {
-        'Authorization': 'Bearer YOUR_API_KEY'
-        }
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
-            </code>
-            </pre>
+            <div class="w-full overflow-hidden">
+                <ul id="directors-list"></ul>
+                <script>
+                    fetch('http://127.0.0.1:8000/api/v1/directors')
+                        .then(response => response.json()) // Convert the response to JSON
+                        .then(data => {
+                            if (data.data) {
+                                const directors = data.data.slice(0, 2); // Limit to 2 results
+                                const directorsList = document.getElementById('directors-list');
+
+                                // Loop through directors and append them to the list
+                                directors.forEach(function(director) {
+                                    const listItem = document.createElement('li');
+                                    listItem.innerHTML = `
+                                        <pre>${JSON.stringify(director, null, 2)}</pre>
+                                    `;
+                                    directorsList.appendChild(listItem);
+                                });
+                            } else {
+                                console.log('Error:', data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('There was an error fetching the directors:', error);
+                        });
+                </script>
+            </div>
         </div>
     </div>
 
@@ -584,7 +642,7 @@
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Request</h2>
         </div>
         <div
-            class="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative max-w-full">
+            class=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative overflow-hidden bg-gray-800 w-full">
             <button class="absolute top-2 right-2 text-white font-bold py-1 px-2 rounded" onclick="copyToClipboard(this)"
                 title="Copy to clipboard">
                 <span id="default-message">
@@ -616,7 +674,7 @@
             </button>
             <pre class="p-4 rounded mt-4 overflow-x-auto">
             <code class="language-javascript">
-        fetch('https://api.example.com/start', {
+        {{-- fetch('https://api.example.com/start', {
         method: 'GET',
         headers: {
         'Authorization': 'Bearer YOUR_API_KEY'
@@ -624,7 +682,7 @@
         })
         .then(response => response.json())
         .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Error:', error)); --}}
             </code>
             </pre>
         </div>
@@ -635,7 +693,7 @@
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Response</h2>
         </div>
         <div
-            class="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative max-w-full">
+            class=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative overflow-hidden bg-gray-800 w-full">
             <button class="absolute top-2 right-2 text-white font-bold py-1 px-2 rounded" onclick="copyToClipboard(this)"
                 title="Copy to clipboard">
                 <span id="default-message">
@@ -665,19 +723,33 @@
                     </span>
                 </span>
             </button>
-            <pre class="p-4 rounded mt-4 overflow-x-auto">
-            <code class="language-javascript">
-        fetch('https://api.example.com/start', {
-        method: 'GET',
-        headers: {
-        'Authorization': 'Bearer YOUR_API_KEY'
-        }
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
-            </code>
-            </pre>
+            <div class="w-full overflow-hidden">
+                <ul id="genres-list"></ul>
+                <script>
+                    fetch('http://127.0.0.1:8000/api/v1/genres')
+                        .then(response => response.json()) // Convert the response to JSON
+                        .then(data => {
+                            if (data.data) {
+                                const genres = data.data.slice(0, 2); // Limit to 2 results
+                                const genresList = document.getElementById('genres-list');
+
+                                // Loop through genres and append them to the list
+                                genres.forEach(function(genre) {
+                                    const listItem = document.createElement('li');
+                                    listItem.innerHTML = `
+                                        <pre>${JSON.stringify(genre, null, 2)}</pre>
+                                    `;
+                                    genresList.appendChild(listItem);
+                                });
+                            } else {
+                                console.log('Error:', data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('There was an error fetching the genres:', error);
+                        });
+                </script>
+            </div>
         </div>
     </div>
 
@@ -746,7 +818,7 @@
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Request</h2>
         </div>
         <div
-            class="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative max-w-full">
+            class=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative overflow-hidden bg-gray-800 w-full">
             <button class="absolute top-2 right-2 text-white font-bold py-1 px-2 rounded" onclick="copyToClipboard(this)"
                 title="Copy to clipboard">
                 <span id="default-message">
@@ -778,7 +850,7 @@
             </button>
             <pre class="p-4 rounded mt-4 overflow-x-auto">
             <code class="language-javascript">
-        fetch('https://api.example.com/start', {
+        {{-- fetch('https://api.example.com/start', {
         method: 'GET',
         headers: {
         'Authorization': 'Bearer YOUR_API_KEY'
@@ -786,7 +858,7 @@
         })
         .then(response => response.json())
         .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Error:', error)); --}}
             </code>
             </pre>
         </div>
@@ -797,7 +869,7 @@
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Response</h2>
         </div>
         <div
-            class="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative max-w-full">
+            class=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative overflow-hidden bg-gray-800 w-full">
             <button class="absolute top-2 right-2 text-white font-bold py-1 px-2 rounded" onclick="copyToClipboard(this)"
                 title="Copy to clipboard">
                 <span id="default-message">
@@ -827,19 +899,33 @@
                     </span>
                 </span>
             </button>
-            <pre class="p-4 rounded mt-4 overflow-x-auto">
-            <code class="language-javascript">
-        fetch('https://api.example.com/start', {
-        method: 'GET',
-        headers: {
-        'Authorization': 'Bearer YOUR_API_KEY'
-        }
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
-            </code>
-            </pre>
+            <div class="w-full overflow-hidden">
+                <ul id="tickets-list"></ul>
+                <script>
+                    fetch('http://127.0.0.1:8000/api/v1/tickets')
+                        .then(response => response.json()) // Convert the response to JSON
+                        .then(data => {
+                            if (data.data) {
+                                const tickets = data.data.slice(0, 2); // Limit to 2 results
+                                const ticketsList = document.getElementById('tickets-list');
+
+                                // Loop through tickets and append them to the list
+                                tickets.forEach(function(ticket) {
+                                    const listItem = document.createElement('li');
+                                    listItem.innerHTML = `
+                                        <pre>${JSON.stringify(ticket, null, 2)}</pre>
+                                    `;
+                                    ticketsList.appendChild(listItem);
+                                });
+                            } else {
+                                console.log('Error:', data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('There was an error fetching the tickets:', error);
+                        });
+                </script>
+            </div>
         </div>
     </div>
 
@@ -906,7 +992,7 @@
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Request</h2>
         </div>
         <div
-            class="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative max-w-full">
+            class=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative overflow-hidden bg-gray-800 w-full">
             <button class="absolute top-2 right-2 text-white font-bold py-1 px-2 rounded" onclick="copyToClipboard(this)"
                 title="Copy to clipboard">
                 <span id="default-message">
@@ -938,7 +1024,7 @@
             </button>
             <pre class="p-4 rounded mt-4 overflow-x-auto">
             <code class="language-javascript">
-        fetch('https://api.example.com/start', {
+        {{-- fetch('https://api.example.com/start', {
         method: 'GET',
         headers: {
         'Authorization': 'Bearer YOUR_API_KEY'
@@ -946,7 +1032,7 @@
         })
         .then(response => response.json())
         .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Error:', error)); --}}
             </code>
             </pre>
         </div>
@@ -957,7 +1043,7 @@
             <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Response</h2>
         </div>
         <div
-            class="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative max-w-full">
+            class=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow mx-5 flex-grow relative overflow-hidden bg-gray-800 w-full">
             <button class="absolute top-2 right-2 text-white font-bold py-1 px-2 rounded" onclick="copyToClipboard(this)"
                 title="Copy to clipboard">
                 <span id="default-message">
@@ -987,19 +1073,33 @@
                     </span>
                 </span>
             </button>
-            <pre class="p-4 rounded mt-4 overflow-x-auto">
-            <code class="language-javascript">
-        fetch('https://api.example.com/start', {
-        method: 'GET',
-        headers: {
-        'Authorization': 'Bearer YOUR_API_KEY'
-        }
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
-            </code>
-            </pre>
+            <div class="w-full overflow-hidden">
+                <ul id="reviews-list"></ul>
+                <script>
+                    fetch('http://127.0.0.1:8000/api/v1/reviews')
+                        .then(response => response.json()) // Convert the response to JSON
+                        .then(data => {
+                            if (data.data) {
+                                const reviews = data.data.slice(0, 2); // Limit to 2 results
+                                const reviewsList = document.getElementById('reviews-list');
+
+                                // Loop through reviews and append them to the list
+                                reviews.forEach(function(review) {
+                                    const listItem = document.createElement('li');
+                                    listItem.innerHTML = `
+                                        <pre>${JSON.stringify(review, null, 2)}</pre>
+                                    `;
+                                    reviewsList.appendChild(listItem);
+                                });
+                            } else {
+                                console.log('Error:', data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('There was an error fetching the reviews:', error);
+                        });
+                </script>
+            </div>
         </div>
     </div>
 
