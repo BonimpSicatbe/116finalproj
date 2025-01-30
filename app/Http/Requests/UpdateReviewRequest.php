@@ -22,7 +22,8 @@ class UpdateReviewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'movie_id' => 'required|exists:movies,id',
+            'user_id' => 'required|exists:users,id|unique:reviews,user_id,NULL,id,movie_id,' . $this->movie_id,
         ];
     }
 }

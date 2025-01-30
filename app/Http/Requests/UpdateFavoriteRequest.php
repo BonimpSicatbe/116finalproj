@@ -22,7 +22,8 @@ class UpdateFavoriteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => 'required|exists:users,id',
+            'movie_id' => 'required|exists:movies,id|unique:favorites,movie_id,NULL,id,user_id,' . $this->user_id,
         ];
     }
 }

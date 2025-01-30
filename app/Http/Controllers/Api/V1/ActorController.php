@@ -47,12 +47,23 @@ class ActorController extends Controller
     public function store(StoreActorRequest $request)
     {
         try {
+            // Create the actor with validated data
             $actor = Actor::create($request->validated());
+
+            // Update profile_url dynamically if not provided
+            if (!$request->filled('profile_url')) {
+                $actor->update(['profile_url' => url('actors/' . $actor->id)]);
+            }
+
             return new ActorResource($actor);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'An error occurred while creating the actor.'], 500);
+            return response()->json([
+                'error' => 'An error occurred while creating the actor.',
+                'message' => $e->getMessage(),
+            ], 500);
         }
     }
+
 
     /**
      * Display the specified resource.

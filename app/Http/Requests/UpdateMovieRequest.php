@@ -22,13 +22,12 @@ class UpdateMovieRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'sometimes|string|max:255',
+            'title' => 'sometimes|string|max:255|unique:movies,title,' . $this->route('movie'),
             'description' => 'sometimes|string',
             'releaseDate' => 'sometimes|date',
             'duration' => 'sometimes|integer|min:1',
             'language' => 'sometimes|string|max:100',
             'country' => 'sometimes|string|max:100',
-            'rating' => 'sometimes|numeric|min:0|max:10',
             'posterUrl' => 'sometimes|url',
             'trailerUrl' => 'sometimes|url',
         ];
