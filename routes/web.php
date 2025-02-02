@@ -4,9 +4,9 @@ use App\Http\Controllers\MovieConntroller;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 // Route::get('/landing-page', function () {
 //     return view('landingPage');
 // });
@@ -14,9 +14,9 @@ Route::get('/documentation', function () {
     return view('documentation');
 });
 
-Route::get('/landing-page', function () {
+Route::get('/', function () {
     return view('landingPage');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
 
 // VIEWS
 Route::resource('movies', MovieConntroller::class);
@@ -28,3 +28,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+
