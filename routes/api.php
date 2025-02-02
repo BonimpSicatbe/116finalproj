@@ -17,11 +17,12 @@ Route::get('/user', function (Request $request) {
 
 Route::group([
     'prefix' => 'v1',
+    'middleware' => ['auth:sanctum'], // Protect API routes
     'namespace' => 'App\Http\Controllers\Api\V1'
 ], function () {
     Route::apiResource('movies', MovieController::class);
     Route::apiResource('genres', GenreController::class);
-    Route::apiResource('actors', ActorController::class);
+    Route::apiResource('actors', ActorController::class);   
     Route::apiResource('reviews', ReviewController::class);
     Route::apiResource('directors', DirectorController::class);
     Route::apiResource('tickets', TicketController::class);

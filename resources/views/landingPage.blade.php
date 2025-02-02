@@ -122,8 +122,8 @@
 
 <footer id="footer" class="py-8 bg-[#030712]">
     <div class="container mx-auto text-center">
-        <p>&copy; 2025 Broadyway Movies <span class="text-[#ff2c21] font-bold">API</span> Documentation • BSIT 4-1 • ITEC 116 • All rights
-            reserved.</p>
+        <p>&copy; 2025 Broadyway Movies <span class="text-[#ff2c21] font-bold">API</span> Documentation • BSIT 4-1 • ITEC 116 •
+        Cool-Pal Group • All rights reserved.</p>
     </div>
 </footer>
 @endsection

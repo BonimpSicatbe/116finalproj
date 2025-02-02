@@ -29,27 +29,25 @@
     </div>
 
     <div id="getting-started" class="space-y-6 mt-11">
-        <div class="container ml-5 mr-5">
-            <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Getting Started</h2>
-            <p class="text-gray-400 mt-6 text-xl leading-relaxed ml-5 mr-20">Follow these steps to start using the
-                Broadway Shows API:</p>
-            <ol class="list-decimal space-y-8 mt-6 ml-10 mr-20 text-gray-400">
-                <li>
-                    <h3 class="text-xl font-semibold text-[#d7d7db] mb-2">Credentials</h3>
-                    <div class="p-2 bg-gray-700 rounded-lg max-w-2xl">
-                        <div class="flex flex-col gap-2">
-                            <div class="badge badge-outline badge- rounded-md font-bold">HEADER</div>
-                            @if (Auth::check())
-                                <input type="text" class="input input-sm input-bordered" 
-                                    placeholder="Authentication" disabled="disabled">
-                            @else
-                                <input type="text" class="input input-sm input-bordered disabled"
-                                    placeholder="Authentication" disabled>
-                            @endif
+    <div class="container ml-5 mr-5">
+        <h2 class="text-2xl font-bold text-[#d7d7db] my-2">Getting Started</h2>
+        <p class="text-gray-400 mt-6 text-xl leading-relaxed ml-5 mr-20">Follow these steps to start using the Broadway Shows API:</p>
+        <ol class="list-decimal space-y-8 mt-6 ml-10 mr-20 text-gray-400">
+            <li>
+                <h3 class="text-xl font-semibold text-[#d7d7db] mb-2">Your API Token</h3>
+                <div class="p-2 bg-gray-700 rounded-lg max-w-2xl">
+                    <div class="flex flex-col gap-2">
+                        <div class="badge badge-outline badge- rounded-md font-bold">HEADER</div>
+                        @if (Auth::check())
+                            <input type="text" class="input input-sm input-bordered" value="{{ Auth::user()->tokens->last()->token ?? 'No token available' }}" disabled>
+                        @else
+                            <input type="text" class="input input-sm input-bordered disabled"
+                                placeholder="Authentication" disabled>
+                        @endif
 
-                            <a href="{{ route('login') }}" class="flex flex-row gap-4 items-center hover:link">
-                                <i class="fa-solid fa-key"></i>
-                                <span>Log in to use your API keys</span>
+                        <a href="{{ route('login') }}" class="flex flex-row gap-4 items-center hover:link">
+                            <i class="fa-solid fa-key"></i>
+                            <span>Log in to use your API keys</span>
                             </a>
                         </div>
                     </div>
